@@ -6,7 +6,7 @@ A package that lets you plan changes to your models in a simple manner.
 ## Installation
 Require the package via composer
 ```bash
-composer require pakomp/eloquent-model-future
+composer require dixie/eloquent-model-future
 ```
 
 Run the package migrations to create a `futures` table, that will hold every future of your selected models.

@@ -35,11 +35,15 @@ class FuturePlanner
      *
      * @param ModelFuture $model
      */
-    public function __construct(ModelFuture $model)
+    public function __construct(ModelFuture $model, string $newFuture = null)
     {
         $this->model = $model;
         $this->futures = $this->model->uncommittedFutures();
-        $this->newFuture = new Future;
+        if ($newFuture == null) {
+            $this->newFuture = new Future;
+        } else {
+            $this->newFuture = new $newFuture;
+        }
     }
 
     /**

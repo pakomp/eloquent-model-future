@@ -40,7 +40,7 @@ $nextMonth = Carbon\Carbon::now()->addMonth();
 $user->future()->plan([
     'bio' => 'Happy developer time. Wooh!',
     'mood' => 'excited',
-])->for($nextMonth);
+])->at($nextMonth);
 
 // Does our user have any scheduled plans for next month?
 $user->future()->anyPlansFor($nextMonth); // true
@@ -93,7 +93,7 @@ $futurePlans->resultDiff()  // Shows which attributes has changed
 | **FutureCollection**#*result* | - | Model | Gets the model back with all the future data filled. **It is not saved** |
 | **FutureCollection**#*resultDiff* | - | Support\Collection | Gets a list of all fields that would change, with both *before* and *after* |
 | **FuturePlanner**#*plan* | array | FuturePlanner | Set the attributes which should be persisted later. |
-| **FuturePlanner**#*for* | Carbon | Future | Set the date for when the attributes should be persisted. |
+| **FuturePlanner**#*at* | Carbon | Future | Set the date for when the attributes should be persisted. |
 | **FuturePlanner**#*see* | Carbon | Model | See the final result of a model for a given date. |
 | **FuturePlanner**#*getPlans* | - | FutureCollection | Get all future plans for a model. |
 | **FuturePlanner**#*getPlansFor* | Carbon | FutureCollection | Get all future plans for a model for the given day. |

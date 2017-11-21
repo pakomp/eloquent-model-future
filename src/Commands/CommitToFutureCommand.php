@@ -34,7 +34,12 @@ class CommitToFutureCommand extends Command
             ->untilDate($today)
             ->uncommitted()
             ->get();
-
+        foreach(getSubclassesOf(Future::class) as $class) {
+            $futures->concat($class::with('futureable')
+                ->untilDate($today)
+                ->uncommitted()
+                ->get());
+        }
 
         if ($futures->isEmpty()) {
             $this->outputMessage('No future plans for today.');
@@ -52,6 +57,14 @@ class CommitToFutureCommand extends Command
         $this->outputMessage("{$futures->count()} futures updated.");
     }
 
+    private function getSubclassesOf($parent) {
+        $result = array();
+        foreach (get_declared_classes() as $class) {
+            if (is_subclass_of($class, $parent))
+                $result[] = $class;
+        }
+        return $result;
+    }
 
     /**
      * Write a line to the commandline

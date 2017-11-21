@@ -8,14 +8,29 @@ class FutureCollection extends EloquentCollection
 {
     /**
      * Get the original model state
-     *
-     * @return Illuminate\Support\Collection
+     * 
+     * @return Dixie\EloquentModelFuture\Contracts\ModelFuture
      */
     public function original()
     {
-        return $this->map(function ($item) {
-            return $item->futureable;
+        $model = $this->first()->futureable;
+        return $model;
+    }
+
+    /**
+     * Get the models for each change.
+     * @return Dixie\EloquentModelFuture\Contracts\ModelFuture
+     */
+    public function models($include_org=false)
+    {
+        $res = $this->map(function ($item) {
+            $model = (clone $item->futureable)->forceFill($item->data);
+            return $model;
         });
+        if($include_org) {
+            $res->prepend($this->original());
+        }
+        return $res;
     }
 
     /**

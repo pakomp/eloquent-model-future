@@ -61,6 +61,27 @@ class FuturePlanner
     }
 
     /**
+     * Set if the future needs approval.
+     *
+     * @param boolean $needed
+     * Set to false to remove the approval need from the future
+     *
+     * @return Dixie\EloquentModelFuture\Models\Future
+     */
+    public function needsApproval($needed=true)
+    {
+        if($needed) {
+            $this->newFuture->needs_approve = true;
+        } else {
+            $this->newFuture->needs_approve = null;
+        }
+
+        $this->newFuture->save();
+
+        return $this->newFuture;
+    }
+
+    /**
      * Set the date for when future should be committed.
      *
      * @param Carbon $futureDate

@@ -15,11 +15,14 @@ class CreateFuturesTable extends Migration
     {
         Schema::create('futures', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('createe_user_id')->unsinged()->nullable();
+            $table->unsignedInteger('createe_user_id')->nullable();
             $table->morphs('futureable');
             $table->json('data');
             $table->timestamp('commit_at');
             $table->timestamp('committed_at')->nullable()->default(null);
+            $table->boolean('needs_approval')->nullable()->default(null);
+            $table->unsignedInteger('approvee_user_id')->nullable()->default(null);
+            $table->timestamp('approved_at')->nullable()->default(null);
             $table->timestamps();
             $table->softDeletes();
 

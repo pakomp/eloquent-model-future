@@ -31,6 +31,7 @@ class Future extends Model
         'commit_at',
         'committed_at',
         'deleted_at',
+        'approved_at',
     ];
 
     /**
@@ -41,6 +42,7 @@ class Future extends Model
     protected $fillable = [
         'futureable_id', 'futureable_type',
         'commit_at', 'data', 'committed_at',
+        'needs_approval'
     ];
 
     /**
@@ -75,6 +77,19 @@ class Future extends Model
         return $this->belongsTo(
             config('auth.providers.users.model'),
             'createe_user_id'
+        );
+    }
+
+    /**
+     * Get the relationship to user who created the future plan.
+     *
+     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function approver()
+    {
+        return $this->belongsTo(
+            config('auth.providers.users.model'),
+            'approvee_user_id'
         );
     }
 
@@ -127,5 +142,29 @@ class Future extends Model
     public function scopeCommitted(Builder $query)
     {
         return $query->whereNotNull('committed_at');
+    }
+
+    /**
+     * Narrow the scope of a query to only include unapproved futures.
+     *
+     * @param Builder $query
+     *
+     * @return Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeUnapproved(Builder $query)
+    {
+        return $query->whereNotNull('needs_approval')->whereNull('approvee_user_id');
+    }
+
+    /**
+     * Narrow the scope of a query to only include approved futures.
+     *
+     * @param Builder $query
+     *
+     * @return Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeApproved(Builder $query)
+    {
+        return $query->whereNotNull('approvee_user_id')->orWhereNull('needs_approval');
     }
 }

@@ -4,6 +4,7 @@ namespace Dixie\EloquentModelFuture\Traits;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Dixie\EloquentModelFuture\Models\Future;
 use Dixie\EloquentModelFuture\FuturePlanner;
 
@@ -32,6 +33,16 @@ trait HasFuture
     public function uncommittedFutures()
     {
         return $this->futures()->whereNull('committed_at');
+    }
+
+    /**
+     * Defines the relationship between the model and its unapproved futures.
+     *
+     * @return Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function unapprovedFutures()
+    {
+        return $this->futures()->whereNotNull('needs_approval')->whereNull('approvee_user_id');
     }
 
     /**
@@ -65,6 +76,32 @@ trait HasFuture
     public function commitFuturePlan(Future $futurePlan)
     {
         $futurePlan->committed_at = Carbon::now();
+
+        return $futurePlan->save();
+    }
+
+    /**
+     * Approve to the presented result of the model
+     *
+     * @return boolean
+     */
+    public function approve()
+    {
+        $this->future()->getPlansUntil(Carbon::now())
+            ->each([$this, 'approveFuturePlan']);
+
+        return $this->save();
+    }
+
+    /**
+     * Approve the given future.
+     *
+     * @param boolean
+     */
+    public function approveFuturePlan(Future $futurePlan)
+    {
+        $futurePlan->approved_at = Carbon::now();
+        $futurePlan->approver()->associate(Auth::user());
 
         return $futurePlan->save();
     }

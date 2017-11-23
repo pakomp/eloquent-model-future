@@ -13,7 +13,7 @@ trait HasFuture
     /**
      * Defines the relationship between the model and its futures.
      *
-     * @return Illuminate\Database\Eloquent\Relations\MorphMany
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
     public function futures()
     {
@@ -28,7 +28,7 @@ trait HasFuture
     /**
      * Defines the relationship between the model and its uncommitted futures.
      *
-     * @return Illuminate\Database\Eloquent\Relations\MorphMany
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
     public function uncommittedFutures()
     {
@@ -38,7 +38,7 @@ trait HasFuture
     /**
      * Defines the relationship between the model and its unapproved futures.
      *
-     * @return Illuminate\Database\Eloquent\Relations\MorphMany
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
     public function unapprovedFutures()
     {
@@ -48,7 +48,7 @@ trait HasFuture
     /**
      * Start planning the future of a model
      *
-     * @return Dixie\EloquentModelFuture\FuturePlanner
+     * @return \Dixie\EloquentModelFuture\FuturePlanner
      */
     public function future()
     {

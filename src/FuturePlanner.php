@@ -12,21 +12,21 @@ class FuturePlanner
     /**
      * The model under action.
      *
-     * @var Dixie\EloquentModelFuture\Contracts\ModelFuture
+     * @var \Dixie\EloquentModelFuture\Contracts\ModelFuture
      */
     protected $model;
 
     /**
      * A new future instance that is about to get planned.
      *
-     * @var Dixie\EloquentModelFuture\Models\Future
+     * @var \Dixie\EloquentModelFuture\Models\Future
      */
     protected $newFuture;
 
     /**
      * The base query for getting futures.
      *
-     * @var Illuminate\Database\Eloquent\Relations\MorphMany
+     * @var \Illuminate\Database\Eloquent\Relations\MorphMany
      */
     protected $futures;
 
@@ -51,7 +51,7 @@ class FuturePlanner
      *
      * @param array $attributes
      *
-     * @return Dixie\EloquentModelFuture\FuturePlanner
+     * @return \Dixie\EloquentModelFuture\FuturePlanner
      */
     public function plan(array $attributes)
     {
@@ -66,7 +66,7 @@ class FuturePlanner
      * @param boolean $needed
      * Set to false to remove the approval need from the future
      *
-     * @return Dixie\EloquentModelFuture\Models\Future
+     * @return \Dixie\EloquentModelFuture\Models\Future
      */
     public function needsApproval($needed=true)
     {
@@ -86,7 +86,7 @@ class FuturePlanner
      *
      * @param Carbon $futureDate
      *
-     * @return Dixie\EloquentModelFuture\Models\Future
+     * @return \Dixie\EloquentModelFuture\Models\Future
      */
     public function at(Carbon $futureDate)
     {
@@ -107,7 +107,7 @@ class FuturePlanner
      *
      * @param Carbon $futureDate
      *
-     * @return Dixie\EloquentModelFuture\Contracts\ModelFuture
+     * @return \Dixie\EloquentModelFuture\Contracts\ModelFuture
      */
     public function see(Carbon $futureDate)
     {
@@ -117,7 +117,7 @@ class FuturePlanner
     /**
      * Get all future plans for a model.
      *
-     * @return Dixie\EloquentModelFuture\Collections\FutureCollection
+     * @return \Dixie\EloquentModelFuture\Collections\FutureCollection
      */
     public function getPlans()
     {
@@ -129,7 +129,7 @@ class FuturePlanner
      *
      * @param Carbon $futureDate
      *
-     * @return Dixie\EloquentModelFuture\Collections\FutureCollection
+     * @return \Dixie\EloquentModelFuture\Collections\FutureCollection
      */
     public function getPlansFor(Carbon $futureDate)
     {
@@ -141,7 +141,7 @@ class FuturePlanner
      *
      * @param Carbon $futureDate
      *
-     * @return Dixie\EloquentModelFuture\Collections\FutureCollection
+     * @return \Dixie\EloquentModelFuture\Collections\FutureCollection
      */
     public function getPlansUntil(Carbon $futureDate)
     {

@@ -9,7 +9,7 @@ class FutureCollection extends EloquentCollection
     /**
      * Get the original model state
      * 
-     * @return Dixie\EloquentModelFuture\Contracts\ModelFuture
+     * @return \Dixie\EloquentModelFuture\Contracts\ModelFuture
      */
     public function original()
     {
@@ -19,7 +19,7 @@ class FutureCollection extends EloquentCollection
 
     /**
      * Get the models for each change.
-     * @return Dixie\EloquentModelFuture\Contracts\ModelFuture
+     * @return \Dixie\EloquentModelFuture\Contracts\ModelFuture
      */
     public function models($include_org=false)
     {
@@ -36,7 +36,7 @@ class FutureCollection extends EloquentCollection
     /**
      * Gets the model back with all the future data filled.
      *
-     * @return Dixie\EloquentModelFuture\Contracts\ModelFuture
+     * @return \Dixie\EloquentModelFuture\Contracts\ModelFuture
      */
     public function result()
     {
@@ -50,7 +50,7 @@ class FutureCollection extends EloquentCollection
     /**
      * Gets a list of all fields that would change, with both before and after.
      *
-     * @return Illuminate\Support\Collection
+     * @return \Illuminate\Support\Collection
      */
     public function resultDiff()
     {

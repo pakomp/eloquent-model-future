@@ -48,7 +48,7 @@ class Future extends Model
     /**
      * Override the original Eloquent collection.
      *
-     * @param Dixie\EloquentModelFuture\Collections\FutureCollection
+     * @param \Dixie\EloquentModelFuture\Collections\FutureCollection
      */
     public function newCollection(array $models = [])
     {
@@ -59,7 +59,7 @@ class Future extends Model
      * Get the relationship to the associated model,
      * for which the future has been planned.
      *
-     * @return Illuminate\Database\Eloquent\Relations\MorphTo
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
     public function futureable()
     {
@@ -70,7 +70,7 @@ class Future extends Model
     /**
      * Get the relationship to user who created the future plan.
      *
-     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function creator()
     {
@@ -83,7 +83,7 @@ class Future extends Model
     /**
      * Get the relationship to user who created the future plan.
      *
-     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function approver()
     {
@@ -96,10 +96,10 @@ class Future extends Model
     /**
      * Narrow the scope of a query to only include futures for given date.
      *
-     * @param Illuminate\Database\Eloquent\Builder $query
-     * @param Carbon\Carbon $date
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param \Carbon\Carbon $date
      *
-     * @return Illuminate\Database\Eloquent\Builder
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeForDate(Builder $query, Carbon $date)
     {
@@ -113,7 +113,7 @@ class Future extends Model
      * @param Builder $query
      * @param Carbon $date
      *
-     * @return Illuminate\Database\Eloquent\Builder
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeUntilDate(Builder $query, Carbon $date)
     {
@@ -125,7 +125,7 @@ class Future extends Model
      *
      * @param Builder $query
      *
-     * @return Illuminate\Database\Eloquent\Builder
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeUncommitted(Builder $query)
     {
@@ -137,7 +137,7 @@ class Future extends Model
      *
      * @param Builder $query
      *
-     * @return Illuminate\Database\Eloquent\Builder
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeCommitted(Builder $query)
     {
@@ -149,7 +149,7 @@ class Future extends Model
      *
      * @param Builder $query
      *
-     * @return Illuminate\Database\Eloquent\Builder
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeUnapproved(Builder $query)
     {
@@ -161,7 +161,7 @@ class Future extends Model
      *
      * @param Builder $query
      *
-     * @return Illuminate\Database\Eloquent\Builder
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeApproved(Builder $query)
     {

@@ -14,6 +14,16 @@ class Future extends Model
     use SoftDeletes;
 
     /**
+     * We always want our futures sorted by commit_at
+     */
+    protected static function boot() {
+        parent::boot();
+        static::addGlobalScope('order', function (Builder $builder) {
+            $builder->orderBy('commit_at', 'asc');
+        });
+    }
+
+    /**
      * The attributes that should be casted to native types.
      *
      * @var array

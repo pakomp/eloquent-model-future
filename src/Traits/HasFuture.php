@@ -83,11 +83,15 @@ trait HasFuture
     /**
      * Approve to the presented result of the model
      *
+     * @param Carbon Until what date should futures be approved
      * @return boolean
      */
-    public function approve()
+    public function approveUntil(Carbon $date = null)
     {
-        $this->future()->getPlansUntil(Carbon::now())
+        if (is_null($date)) {
+            $date = Carbon::now();
+        }
+        $this->future()->getPlansUntil($date)
             ->each([$this, 'approveFuturePlan']);
 
         return $this->save();
@@ -100,9 +104,10 @@ trait HasFuture
      */
     public function approveFuturePlan(Future $futurePlan)
     {
-        $futurePlan->approved_at = Carbon::now();
-        $futurePlan->approver()->associate(Auth::user());
-
+        if ($futurePlan->needs_approval && is_null($futurePlan->approved_at)) {
+            $futurePlan->approved_at = Carbon::now();
+            $futurePlan->approver()->associate(Auth::user());
+        }
         return $futurePlan->save();
     }
 }

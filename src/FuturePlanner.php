@@ -66,19 +66,17 @@ class FuturePlanner
      * @param boolean $needed
      * Set to false to remove the approval need from the future
      *
-     * @return \Dixie\EloquentModelFuture\Models\Future
+     * @return \Dixie\EloquentModelFuture\FuturePlanner
      */
     public function needsApproval($needed=true)
     {
         if($needed) {
-            $this->newFuture->needs_approve = true;
+            $this->newFuture->needs_approval = true;
         } else {
-            $this->newFuture->needs_approve = null;
+            $this->newFuture->needs_approval = null;
         }
 
-        $this->newFuture->save();
-
-        return $this->newFuture;
+        return $this;
     }
 
     /**
